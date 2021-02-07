@@ -1,3 +1,5 @@
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -8,6 +10,8 @@ import PageSection from '../PageSection';
 import { View$Session, View$Workflow } from '../../types/viewModel';
 import MyLink from '../MyLink';
 import SessionsTable from '../SessionsTable';
+import WorkflowConfigCode from '../WorkflowConfigCode';
+import { DialogTitle } from '@material-ui/core';
 
 type Props = {
   workflow: ApiResponse<View$Workflow>;
@@ -15,6 +19,11 @@ type Props = {
 };
 
 const ShpwWorkflowPageTemplate: React.VFC<Props> = ({ workflow, sessions }) => {
+  const [openConfig, setOpenConfig] = React.useState(false);
+
+  const onOpenConfig = () => setOpenConfig(true);
+  const onCloseConfig = () => setOpenConfig(false);
+
   if (!workflow.data) {
     return null;
   }
@@ -25,7 +34,7 @@ const ShpwWorkflowPageTemplate: React.VFC<Props> = ({ workflow, sessions }) => {
         <Table>
           <TableBody>
             <TableRow>
-              <TableCell>ID</TableCell>
+              <TableCell width="300">ID</TableCell>
               <TableCell>{workflow.data.id}</TableCell>
             </TableRow>
             <TableRow>
@@ -38,6 +47,18 @@ const ShpwWorkflowPageTemplate: React.VFC<Props> = ({ workflow, sessions }) => {
                 <MyLink to={`/projects/${workflow.data.projectId}`}>
                   {workflow.data.projectName}
                 </MyLink>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>定義</TableCell>
+              <TableCell>
+                <Button onClick={onOpenConfig} color="secondary">
+                  開く
+                </Button>
+                <Dialog open={openConfig} onClose={onCloseConfig} maxWidth="lg">
+                  <DialogTitle>定義ファイル</DialogTitle>
+                  <WorkflowConfigCode config={workflow.data.config} />
+                </Dialog>
               </TableCell>
             </TableRow>
           </TableBody>
