@@ -43,3 +43,14 @@ export type View$SessionAttempt = {
   sessionTime: Dayjs;
   status: 'success' | 'error' | 'killed' | 'running';
 };
+
+export type View$Task = {
+  id: number;
+  parentId: number;
+  fullName: string;
+  startedAt: Dayjs;
+  updatedAt?: Dayjs;
+  config: unknown;
+  state: string;
+  isGroup: boolean;
+};

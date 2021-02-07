@@ -6,6 +6,7 @@ import {
   RestProject,
   RestSession,
   RestSessionAttempt,
+  RestTask,
   RestWorkflowDefinition,
 } from '../api/@types';
 import {
@@ -13,6 +14,7 @@ import {
   View$Project,
   View$Session,
   View$SessionAttempt,
+  View$Task,
   View$Workflow,
 } from '../types/viewModel';
 
@@ -68,6 +70,17 @@ export const toSessionAttempt = (
   sessionId: src.sessionId,
   sessionTime: dayjs(String(src.sessionTime)),
   status: toAttemptStatus(src),
+});
+
+export const toTask = (src: RestTask): View$Task => ({
+  id: src.id,
+  parentId: src.parentId,
+  fullName: src.fullName,
+  startedAt: dayjs(src.startedAt),
+  updatedAt: src.updatedAt ? dayjs(src.updatedAt) : undefined,
+  config: src.config,
+  state: src.state,
+  isGroup: src.group || (src as any).isGroup,
 });
 
 const toAttemptStatus = (attempt: Attempt): View$AttemptStatus => {
