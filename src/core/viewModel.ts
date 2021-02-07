@@ -12,4 +12,5 @@ export const toApiResponse = <R1, R2>(
 export const toProject = (src: RestProject): View$Project => ({
   id: src.id,
   name: src.name,
+  revision: src.revision,
 });
