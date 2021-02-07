@@ -28,10 +28,10 @@ const WorkflowsTable: React.VFC<Props> = ({ workflows }) => (
       {workflows.map((w) => (
         <TableRow key={w.id}>
           <TableCell align="center">
-            <MyLink to={`/workflow/${w.id}`}>{w.id}</MyLink>
+            <MyLink to={`/workflows/${w.id}`}>{w.id}</MyLink>
           </TableCell>
           <TableCell>
-            <MyLink to={`/workflow/${w.id}`}>{w.name}</MyLink>
+            <MyLink to={`/workflows/${w.id}`}>{w.name}</MyLink>
           </TableCell>
           <TableCell>
             <MyLink to={`/projects/${w.projectId}`}>{w.projectName}</MyLink>

@@ -8,6 +8,7 @@ import ProjectsPage from './pages/ProjectsPage';
 import SessionsPage from './pages/SessionsPage';
 import WorkflowsPage from './pages/WorkflowsPage';
 import ShowProjectPage from './pages/ShowProjectPage';
+import ShowWorkflowPage from './pages/ShowWorkflowPage';
 
 const App: React.VFC = () => (
   <>
@@ -17,8 +18,9 @@ const App: React.VFC = () => (
         <Switch>
           <Route path="/projects" exact component={ProjectsPage} />
           <Route path="/projects/:id" exact component={ShowProjectPage} />
-          <Route path="/sessions" exact component={SessionsPage} />
           <Route path="/workflows" exact component={WorkflowsPage} />
+          <Route path="/workflows/:id" exact component={ShowWorkflowPage} />
+          <Route path="/sessions" exact component={SessionsPage} />
           <Redirect to="/projects" />
         </Switch>
       </MainLayout>
