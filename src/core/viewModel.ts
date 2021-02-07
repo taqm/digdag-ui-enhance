@@ -5,12 +5,14 @@ import {
   Attempt,
   RestProject,
   RestSession,
+  RestSessionAttempt,
   RestWorkflowDefinition,
 } from '../api/@types';
 import {
   View$AttemptStatus,
   View$Project,
   View$Session,
+  View$SessionAttempt,
   View$Workflow,
 } from '../types/viewModel';
 
@@ -51,6 +53,20 @@ export const toSession = (src: RestSession): View$Session => ({
       : undefined,
     status: toAttemptStatus(src.lastAttempt),
   },
+});
+
+export const toSessionAttempt = (
+  src: RestSessionAttempt,
+): View$SessionAttempt => ({
+  id: src.id,
+  createdAt: dayjs(src.createdAt),
+  projectId: src.project.id,
+  projectName: src.project.name,
+  workflowId: src.workflow.id,
+  workflowName: src.workflow.name,
+  sessionId: src.sessionId,
+  sessionTime: dayjs(String(src.sessionTime)),
+  status: toAttemptStatus(src),
 });
 
 const toAttemptStatus = (attempt: Attempt): View$AttemptStatus => {

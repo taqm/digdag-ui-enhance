@@ -33,10 +33,13 @@ export type View$Session = {
 
 export type View$SessionAttempt = {
   id: number;
+  createdAt: Dayjs;
+  finishedAt?: Dayjs;
   projectId: number;
   projectName: string;
   workflowId: number;
   workflowName: string;
   sessionId: number;
+  sessionTime: Dayjs;
   status: 'success' | 'error' | 'killed' | 'running';
 };
