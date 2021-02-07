@@ -12,30 +12,22 @@ const StyledSideMenu = styled(List)({
   minHeight: '100%',
 });
 
+const listItemProps = {
+  button: true,
+  component: NavLink,
+  style: { paddingLeft: 24 },
+  activeClassName: 'Mui-selected',
+} as const;
+
 const SideMenu: React.VFC<Props> = ({}) => (
   <StyledSideMenu>
-    <ListItem
-      button
-      component={NavLink}
-      to="/projects"
-      activeClassName="Mui-selected"
-    >
+    <ListItem to="/projects" {...listItemProps}>
       <ListItemText primary="Projects" />
     </ListItem>
-    <ListItem
-      button
-      component={NavLink}
-      to="/sessions"
-      activeClassName="Mui-selected"
-    >
+    <ListItem to="/sessions" {...listItemProps}>
       <ListItemText primary="Sessions" />
     </ListItem>
-    <ListItem
-      button
-      component={NavLink}
-      to="/attempts"
-      activeClassName="Mui-selected"
-    >
+    <ListItem to="/attempts" {...listItemProps}>
       <ListItemText primary="Attempts" />
     </ListItem>
   </StyledSideMenu>

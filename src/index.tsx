@@ -1,10 +1,10 @@
 import { CssBaseline } from '@material-ui/core';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { HashRouter, Route, Switch } from 'react-router-dom';
-import MainLayout from './components/MainLayout';
+import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
 
-import IndexPage from './pages/IndexPage';
+import MainLayout from './components/MainLayout';
+import ProjectsPage from './pages/ProjectsPage';
 
 const App: React.VFC = () => (
   <>
@@ -12,7 +12,8 @@ const App: React.VFC = () => (
     <HashRouter>
       <MainLayout>
         <Switch>
-          <Route path="/" exact component={IndexPage} />
+          <Route path="/projects" exact component={ProjectsPage} />
+          <Redirect to="/projects" />
         </Switch>
       </MainLayout>
     </HashRouter>

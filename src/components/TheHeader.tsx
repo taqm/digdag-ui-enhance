@@ -20,7 +20,7 @@ const BrandText = styled(Typography)({
 
 const TheHeader: React.VFC<Props> = () => (
   <AppBar position="sticky">
-    <Container maxWidth="md">
+    <Container maxWidth="xl">
       <Toolbar color="inherit" disableGutters>
         <MyLink to="/">
           <Button>

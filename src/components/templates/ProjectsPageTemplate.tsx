@@ -12,7 +12,7 @@ type Props = {
   projects: ApiResponse<View$Project[]>;
 };
 
-const IndexPageTemplate: React.VFC<Props> = ({ projects }) => {
+const ProjectsPageTemplate: React.VFC<Props> = ({ projects }) => {
   if (!projects.data) {
     return null;
   }
@@ -47,6 +47,6 @@ const IndexPageTemplate: React.VFC<Props> = ({ projects }) => {
   );
 };
 
-IndexPageTemplate.displayName = 'IndexPageTemplate';
+ProjectsPageTemplate.displayName = 'IndexPageTemplate';
 
-export default IndexPageTemplate;
+export default ProjectsPageTemplate;
