@@ -5,6 +5,7 @@ import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 import MainLayout from './components/MainLayout';
 import ProjectsPage from './pages/ProjectsPage';
+import SessionsPage from './pages/SessionsPage';
 
 const App: React.VFC = () => (
   <>
@@ -13,6 +14,7 @@ const App: React.VFC = () => (
       <MainLayout>
         <Switch>
           <Route path="/projects" exact component={ProjectsPage} />
+          <Route path="/sessions" exact component={SessionsPage} />
           <Redirect to="/projects" />
         </Switch>
       </MainLayout>

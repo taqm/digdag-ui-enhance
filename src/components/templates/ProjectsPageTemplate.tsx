@@ -7,6 +7,7 @@ import * as React from 'react';
 
 import MyLink from '../MyLink';
 import PageSection from '../PageSection';
+import { View$Project } from '../../types/viewModel';
 
 type Props = {
   projects: ApiResponse<View$Project[]>;
