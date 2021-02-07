@@ -21,6 +21,7 @@ const SideMenuWrapper = styled('div')({
 
 const MainContent = styled('div')({
   paddingTop: 16,
+  paddingBottom: 64,
 });
 
 const MainLayout: React.FC = ({ children }) => (

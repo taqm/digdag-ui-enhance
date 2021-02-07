@@ -7,6 +7,7 @@ import MainLayout from './components/MainLayout';
 import ProjectsPage from './pages/ProjectsPage';
 import SessionsPage from './pages/SessionsPage';
 import WorkflowsPage from './pages/WorkflowsPage';
+import ShowProjectPage from './pages/ShowProjectPage';
 
 const App: React.VFC = () => (
   <>
@@ -15,6 +16,7 @@ const App: React.VFC = () => (
       <MainLayout>
         <Switch>
           <Route path="/projects" exact component={ProjectsPage} />
+          <Route path="/projects/:id" exact component={ShowProjectPage} />
           <Route path="/sessions" exact component={SessionsPage} />
           <Route path="/workflows" exact component={WorkflowsPage} />
           <Redirect to="/projects" />
