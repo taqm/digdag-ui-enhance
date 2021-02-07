@@ -29,6 +29,10 @@ const config: Configuration = {
   ],
   devServer: {
     serveIndex: true,
+    proxy: {
+      '/api': 'http://localhost:60021',
+      '/images': 'http://localhost:60021',
+    },
   },
 };
 
