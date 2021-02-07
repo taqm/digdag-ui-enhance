@@ -1,7 +1,9 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-const App: React.VFC = () => <h1>Hello React</h1>;
+import Routes from './Routes';
+
+const App: React.VFC = () => <Routes />;
 
 const rootId = Date.now().toString(16);
 
