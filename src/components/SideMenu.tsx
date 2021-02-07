@@ -24,6 +24,9 @@ const SideMenu: React.VFC<Props> = ({}) => (
     <ListItem to="/projects" {...listItemProps}>
       <ListItemText primary="Projects" />
     </ListItem>
+    <ListItem to="/workflows" {...listItemProps}>
+      <ListItemText primary="Workflows" />
+    </ListItem>
     <ListItem to="/sessions" {...listItemProps}>
       <ListItemText primary="Sessions" />
     </ListItem>

@@ -1,11 +1,17 @@
 import dayjs from 'dayjs';
 import { responseInterface } from 'swr';
 
-import { Attempt, RestProject, RestSession } from '../api/@types';
+import {
+  Attempt,
+  RestProject,
+  RestSession,
+  RestWorkflowDefinition,
+} from '../api/@types';
 import {
   View$AttemptStatus,
   View$Project,
   View$Session,
+  View$Workflow,
 } from '../types/viewModel';
 
 export const toApiResponse = <R1, R2>(
@@ -20,6 +26,14 @@ export const toProject = (src: RestProject): View$Project => ({
   id: src.id,
   name: src.name,
   revision: src.revision,
+});
+
+export const toWorkflow = (src: RestWorkflowDefinition): View$Workflow => ({
+  id: src.id,
+  name: src.name,
+  projectId: src.project.id,
+  projectName: src.project.name,
+  config: src.config,
 });
 
 export const toSession = (src: RestSession): View$Session => ({

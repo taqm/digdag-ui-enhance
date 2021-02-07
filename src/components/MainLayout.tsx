@@ -30,7 +30,7 @@ const MainLayout: React.FC = ({ children }) => (
       <SideMenuWrapper>
         <SideMenu />
       </SideMenuWrapper>
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" style={{ overflowY: 'auto' }}>
         <MainContent>{children}</MainContent>
       </Container>
     </PageBody>

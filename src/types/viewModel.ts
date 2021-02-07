@@ -8,6 +8,14 @@ export type View$Project = {
   revision: string;
 };
 
+export type View$Workflow = {
+  id: number;
+  name: string;
+  projectId: number;
+  projectName: string;
+  config: unknown; // 操作しない
+};
+
 export type View$Session = {
   id: number;
   projectId: number;
