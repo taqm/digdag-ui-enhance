@@ -11,6 +11,7 @@ import AttemptsPage from './pages/AttemptsPage';
 import ShowProjectPage from './pages/ShowProjectPage';
 import ShowWorkflowPage from './pages/ShowWorkflowPage';
 import ShowSessionPage from './pages/ShowSessionPage';
+import ShowAttemptPage from './pages/ShowAttemptPage';
 
 const App: React.VFC = () => (
   <>
@@ -25,6 +26,7 @@ const App: React.VFC = () => (
           <Route path="/sessions" exact component={SessionsPage} />
           <Route path="/sessions/:id" exact component={ShowSessionPage} />
           <Route path="/attempts" exact component={AttemptsPage} />
+          <Route path="/attempts/:id" exact component={ShowAttemptPage} />
           <Redirect to="/projects" />
         </Switch>
       </MainLayout>

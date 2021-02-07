@@ -60,6 +60,7 @@ export const toSessionAttempt = (
 ): View$SessionAttempt => ({
   id: src.id,
   createdAt: dayjs(src.createdAt),
+  finishedAt: src.finishedAt ? dayjs(src.finishedAt) : undefined,
   projectId: src.project.id,
   projectName: src.project.name,
   workflowId: src.workflow.id,
