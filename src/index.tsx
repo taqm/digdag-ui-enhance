@@ -5,8 +5,9 @@ import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 import MainLayout from './components/MainLayout';
 import ProjectsPage from './pages/ProjectsPage';
-import SessionsPage from './pages/SessionsPage';
 import WorkflowsPage from './pages/WorkflowsPage';
+import SessionsPage from './pages/SessionsPage';
+import AttemptsPage from './pages/AttemptsPage';
 import ShowProjectPage from './pages/ShowProjectPage';
 import ShowWorkflowPage from './pages/ShowWorkflowPage';
 import ShowSessionPage from './pages/ShowSessionPage';
@@ -23,6 +24,7 @@ const App: React.VFC = () => (
           <Route path="/workflows/:id" exact component={ShowWorkflowPage} />
           <Route path="/sessions" exact component={SessionsPage} />
           <Route path="/sessions/:id" exact component={ShowSessionPage} />
+          <Route path="/attempts" exact component={AttemptsPage} />
           <Redirect to="/projects" />
         </Switch>
       </MainLayout>

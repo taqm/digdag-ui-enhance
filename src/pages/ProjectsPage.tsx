@@ -14,6 +14,6 @@ const ProjectsPage: React.VFC = () => {
   return <ProjectsPageTemplate projects={projects} />;
 };
 
-ProjectsPage.displayName = 'IndexPage';
+ProjectsPage.displayName = 'ProjectsPage';
 
 export default ProjectsPage;
