@@ -48,7 +48,7 @@ export type View$Task = {
   id: number;
   parentId: number;
   fullName: string;
-  startedAt: Dayjs;
+  startedAt?: Dayjs;
   updatedAt?: Dayjs;
   config: unknown;
   state: string;

@@ -76,7 +76,7 @@ export const toTask = (src: RestTask): View$Task => ({
   id: src.id,
   parentId: src.parentId,
   fullName: src.fullName,
-  startedAt: dayjs(src.startedAt),
+  startedAt: src.startedAt ? dayjs(src.startedAt) : undefined,
   updatedAt: src.updatedAt ? dayjs(src.updatedAt) : undefined,
   config: src.config,
   state: src.state,
