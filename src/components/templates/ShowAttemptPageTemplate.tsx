@@ -1,3 +1,6 @@
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell, { TableCellProps } from '@material-ui/core/TableCell';
@@ -11,7 +14,6 @@ import MyLink from '../MyLink';
 import AttemptStatus from '../AttemptStatusLabel';
 import { genTaskTree, TaskNode } from '../../core/TaskNode';
 import { DateFormat } from '../../core/consistant';
-import { Button, Dialog, DialogTitle } from '@material-ui/core';
 import WorkflowConfigCode from '../WorkflowConfigCode';
 
 type Props = {
