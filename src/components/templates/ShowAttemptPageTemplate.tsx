@@ -133,33 +133,18 @@ const TaskRowGroup = styled('div')({
   },
   '&.success': {
     background: '#f1f8e9',
-    '&:hover': {
-      background: '#dcedc8',
-    },
   },
   '&.running': {
     background: '#e0f7fa',
-    '&:hover': {
-      background: '#b2ebf2',
-    },
   },
   '&.error': {
     background: '#ffccbc',
-    '&:hover': {
-      background: '#ffab91',
-    },
   },
   '&.group_error': {
     background: '#fbe9e7',
-    '&:hover': {
-      background: '#ff8a65',
-    },
   },
   '&.blocked': {
     background: '#f5f5f5',
-    '&:hover': {
-      background: '#dcedc8',
-    },
   },
 });
 
