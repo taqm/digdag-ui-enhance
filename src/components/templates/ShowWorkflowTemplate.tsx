@@ -1,5 +1,6 @@
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -11,7 +12,6 @@ import { View$Session, View$Workflow } from '../../types/viewModel';
 import MyLink from '../MyLink';
 import SessionsTable from '../SessionsTable';
 import WorkflowConfigCode from '../WorkflowConfigCode';
-import { DialogTitle } from '@material-ui/core';
 
 type Props = {
   workflow: ApiResponse<View$Workflow>;
