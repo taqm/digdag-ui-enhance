@@ -15,7 +15,7 @@ export default (env: WebpackEnv) => {
     entry: r('src/index.tsx'),
     output: {
       path: r('dist'),
-      filename: 'digdag-ui-enhance.js',
+      filename: 'dist.js',
     },
     module: {
       rules: [

@@ -11,7 +11,7 @@ digdagのWeb管理画面を使いやすくします。
 ↓の内容をブックマークとして登録し、digdagの画面にて実行してください。
 
 ```js
-javascript:((d)=>{s=d.createElement('script');s.src='https://taqm.github.io/digdag-ui-enhance/digdag-ui-enhance.js';d.head.appendChild(s)})(document)
+javascript:((d)=>{s=d.createElement('script');s.src='https://taqm.github.io/digdag-ui-enhance/dist.js';d.head.appendChild(s)})(document)
 ```
 
 (トップページで実行することをおすすめします)
