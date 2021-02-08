@@ -11,12 +11,19 @@ const LayoutRoot = styled('div')({
 
 const PageBody = styled('div')({
   display: 'flex',
-  height: '100%',
+  height: 'calc(100vh - 64px)',
+  overflowY: 'auto',
+  position: 'relative',
+  paddingLeft: 200,
 });
 
 const SideMenuWrapper = styled('div')({
   width: 200,
+  top: 64,
+  bottom: 0,
+  left: 0,
   borderRight: '1px solid rgba(0, 0, 0, 0.12)',
+  position: 'fixed',
 });
 
 const MainContent = styled('div')({
@@ -31,7 +38,7 @@ const MainLayout: React.FC = ({ children }) => (
       <SideMenuWrapper>
         <SideMenu />
       </SideMenuWrapper>
-      <Container maxWidth="lg" style={{ overflowY: 'auto' }}>
+      <Container maxWidth="lg">
         <MainContent>{children}</MainContent>
       </Container>
     </PageBody>

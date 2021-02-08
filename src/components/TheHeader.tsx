@@ -19,20 +19,23 @@ const BrandText = styled(Typography)({
 });
 
 const TheHeader: React.VFC<Props> = () => (
-  <AppBar position="sticky">
-    <Container maxWidth="xl">
-      <Toolbar color="inherit" disableGutters>
-        <MyLink to="/">
-          <Button>
-            <BrandLogo src="/images/logo.png" width="32" />
-            <BrandText variant="h5" color="inherit">
-              Digdag
-            </BrandText>
-          </Button>
-        </MyLink>
-      </Toolbar>
-    </Container>
-  </AppBar>
+  <>
+    <AppBar position="fixed">
+      <Container maxWidth="xl">
+        <Toolbar color="inherit" disableGutters>
+          <MyLink to="/">
+            <Button>
+              <BrandLogo src="/images/logo.png" width="32" />
+              <BrandText variant="h5" color="inherit">
+                Digdag
+              </BrandText>
+            </Button>
+          </MyLink>
+        </Toolbar>
+      </Container>
+    </AppBar>
+    <Toolbar />
+  </>
 );
 
 TheHeader.displayName = 'TheHeader';
