@@ -6,34 +6,41 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const r = (...p: string[]) => resolve(__dirname, ...p);
 
-const config: Configuration = {
-  entry: r('src/index.tsx'),
-  output: {
-    path: r('dist'),
-    filename: 'script_[fullhash].js',
-  },
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: 'babel-loader'
-      },
-    ],
-  },
-  resolve: {
-    extensions: ['.js', '.ts', '.tsx'],
-  },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin(),
-  ],
-  devServer: {
-    serveIndex: true,
-    proxy: {
-      '/api': 'http://localhost:60021',
-      '/images': 'http://localhost:60021',
-    },
-  },
+type WebpackEnv = {
+  WEBPACK_SERVE?: true;
 };
 
-export default config;
+export default (env: WebpackEnv) => {
+  const config: Configuration = {
+    entry: r('src/index.tsx'),
+    output: {
+      path: r('dist'),
+      filename: 'digdag-ui-enhance.js',
+    },
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          use: 'babel-loader',
+        },
+      ],
+    },
+    resolve: {
+      extensions: ['.js', '.ts', '.tsx'],
+    },
+    plugins: [new CleanWebpackPlugin()],
+    devServer: {
+      serveIndex: true,
+      proxy: {
+        '/api': 'http://localhost:60021',
+        '/images': 'http://localhost:60021',
+      },
+    },
+  };
+
+  if (env.WEBPACK_SERVE) {
+    config.plugins?.push(new HtmlWebpackPlugin());
+  }
+
+  return config;
+};

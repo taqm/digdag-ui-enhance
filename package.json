@@ -3,7 +3,8 @@
   "scripts": {
     "preapi:gen": "rm -rf src/api",
     "api:gen": "npx openapi2aspida",
-    "dev": "webpack serve --mode development"
+    "dev": "webpack serve --mode development",
+    "build": "webpack --mode production"
   },
   "devDependencies": {
     "@babel/core": "^7.12.13",
