@@ -1,14 +1,14 @@
-import * as React from 'react';
-
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TableCell, { TableCellProps } from '@material-ui/core/TableCell';
 import styled from '@material-ui/styles/styled';
+import * as React from 'react';
 
 import WorkflowConfigCode from './WorkflowConfigCode';
 import { DateFormat } from '../core/consistant';
 import { TaskNode } from '../core/TaskNode';
+import { Colors, ColorSet } from '../core/colors';
 
 const TaskTableHeader = styled('div')({
   background: '#fff',
@@ -18,11 +18,23 @@ const TaskTableHeader = styled('div')({
   top: 0,
 });
 
+const rowBgs = (...pairs: [string, ColorSet][]) => {
+  return Object.fromEntries(
+    pairs.map(([status, colorSet]) => {
+      return [
+        `&.${status}`,
+        {
+          background: colorSet.bg,
+          '&:hover': {
+            background: colorSet.hover,
+          },
+        },
+      ];
+    }),
+  );
+};
+
 const TaskRowGroup = styled('div')({
-  background: '#fff',
-  '&:hover': {
-    background: 'rgb(245, 245, 245)',
-  },
   '& &': {
     border: '1px solid rgba(224, 224, 224, 1)',
     borderRight: 0,
@@ -34,21 +46,14 @@ const TaskRowGroup = styled('div')({
   '& + &': {
     borderTop: 0,
   },
-  '&.success': {
-    background: '#f1f8e9',
-  },
-  '&.running': {
-    background: '#e0f7fa',
-  },
-  '&.error': {
-    background: '#ffccbc',
-  },
-  '&.group_error': {
-    background: '#fbe9e7',
-  },
-  '&.blocked': {
-    background: '#f5f5f5',
-  },
+  ...rowBgs(
+    ['success', Colors.Success],
+    ['planned', Colors.Planned],
+    ['running', Colors.Running],
+    ['error', Colors.Error],
+    ['group_error', Colors.GroupError],
+    ['blocked', Colors.Blocked],
+  ),
 });
 
 const TaskInfoRow = styled('div')({
@@ -84,19 +89,22 @@ const TaskRowMenu = styled('div')({
 
 const NodeStatusLabel = styled('span')({
   '&.success': {
-    color: 'green',
+    color: Colors.Success.text,
+  },
+  '&.planned': {
+    color: Colors.Planned.text,
   },
   '&.running': {
-    color: 'blue',
+    color: Colors.Running.text,
   },
   '&.error': {
-    color: 'red',
+    color: Colors.Error.text,
   },
   '&.group_error': {
-    color: 'red',
+    color: Colors.GroupError.text,
   },
   '&.blocked': {
-    color: '#bdbdbd',
+    color: Colors.Blocked.text,
   },
 });
 
@@ -148,8 +156,10 @@ const TaskRows = React.memo<TaskRowProps>(({ node }) => {
         )}
       </div>
       <TaskChildrenRow>
-        {node.isGroup &&
-          node.nodes.map((n) => <TaskRows key={n.id} node={n} />)}
+        <div style={{ background: 'white' }}>
+          {node.isGroup &&
+            node.nodes.map((n) => <TaskRows key={n.id} node={n} />)}
+        </div>
       </TaskChildrenRow>
     </TaskRowGroup>
   );
