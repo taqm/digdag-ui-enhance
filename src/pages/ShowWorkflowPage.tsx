@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import ShpwWorkflowPageTemplate from '../components/templates/ShowWorkflowTemplate';
 import { useApiClient } from '../contexts/apiClient';
 import { toApiResponse, toSession, toWorkflow } from '../core/viewModel';
+import { useGetAllData } from '../hooks/api';
 
 type PathParam = {
   id: string;
@@ -20,14 +21,12 @@ const ShowWorkflowPage: React.VFC<Props> = ({ id }) => {
   const workflow = toApiResponse(workflowRes, toWorkflow);
 
   const projectId = workflow.data?.projectId ?? -1;
-  const sessionsRes = useAspidaSWR(
-    apiClient.projects._id(workflow.data?.projectId ?? -1).sessions,
-    {
-      query: { workflow: workflow.data?.name },
-      enabled: projectId !== -1,
-    },
-  );
-  const sessions = toApiResponse(sessionsRes, (d) => d.sessions.map(toSession));
+  const sessions = useGetAllData(async (ps, lid) => {
+    const res = await apiClient.projects._id(projectId).sessions.get({
+      query: { workflow: workflow.data?.name, page_size: ps, last_id: lid },
+    });
+    return res.body.sessions.map(toSession);
+  }, projectId !== -1);
 
   return <ShpwWorkflowPageTemplate workflow={workflow} sessions={sessions} />;
 };
