@@ -132,7 +132,7 @@ const TaskRows = React.memo<TaskRowProps>(({ node }) => {
         </TaskInfoRow>
         {menuOpen && (
           <TaskRowMenu>
-            <Button color="primary">ログ</Button>
+            {node.state !== 'blocked' && <Button color="primary">ログ</Button>}
             <Button color="secondary" onClick={onConfigDialogOpen}>
               定義を開く
             </Button>
