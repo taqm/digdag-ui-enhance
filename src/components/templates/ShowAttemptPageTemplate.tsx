@@ -15,9 +15,14 @@ import TasksTable from '../TasksTable';
 type Props = {
   attempt: ApiResponse<View$SessionAttempt>;
   tasks: ApiResponse<View$Task[]>;
+  onLogFileOpen: (taskFullName: string) => void;
 };
 
-const ShpwWorkflowPageTemplate: React.VFC<Props> = ({ attempt, tasks }) => {
+const ShpwWorkflowPageTemplate: React.VFC<Props> = ({
+  attempt,
+  tasks,
+  onLogFileOpen,
+}) => {
   const taskTree = React.useMemo(() => {
     if (!tasks.data) {
       return undefined;
@@ -80,7 +85,12 @@ const ShpwWorkflowPageTemplate: React.VFC<Props> = ({ attempt, tasks }) => {
         </Table>
       </PageSection>
       <PageSection title="タスク">
-        {taskTree && <TasksTable node={taskTree} />}
+        {taskTree && (
+          <TasksTable
+            node={taskTree}
+            onLogFileOpenButtonClick={onLogFileOpen}
+          />
+        )}
       </PageSection>
     </>
   );

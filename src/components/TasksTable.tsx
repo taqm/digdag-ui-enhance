@@ -92,11 +92,7 @@ const NodeStatusLabel = styled('span')({
   },
 });
 
-type TaskRowProps = {
-  node: TaskNode;
-};
-
-const TaskRows = React.memo<TaskRowProps>(({ node }) => {
+const TaskRows = React.memo<Props>(({ node, onLogFileOpenButtonClick }) => {
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [openConfigDialog, setOpenConfigDialog] = React.useState(false);
 
@@ -132,7 +128,14 @@ const TaskRows = React.memo<TaskRowProps>(({ node }) => {
         </TaskInfoRow>
         {menuOpen && (
           <TaskRowMenu>
-            {node.state !== 'blocked' && <Button color="primary">ログ</Button>}
+            {!node.isGroup && node.state !== 'blocked' && (
+              <Button
+                color="primary"
+                onClick={() => onLogFileOpenButtonClick(node.fullName)}
+              >
+                ログを開く
+              </Button>
+            )}
             <Button color="secondary" onClick={onConfigDialogOpen}>
               定義を開く
             </Button>
@@ -142,7 +145,13 @@ const TaskRows = React.memo<TaskRowProps>(({ node }) => {
       <TaskChildrenRow>
         <div style={{ background: 'white' }}>
           {node.isGroup &&
-            node.nodes.map((n) => <TaskRows key={n.id} node={n} />)}
+            node.nodes.map((n) => (
+              <TaskRows
+                key={n.id}
+                node={n}
+                onLogFileOpenButtonClick={onLogFileOpenButtonClick}
+              />
+            ))}
         </div>
       </TaskChildrenRow>
     </TaskRowGroup>
@@ -151,9 +160,10 @@ const TaskRows = React.memo<TaskRowProps>(({ node }) => {
 
 type Props = {
   node: TaskNode;
+  onLogFileOpenButtonClick: (taskFullName: string) => void;
 };
 
-const TasksTable: React.VFC<Props> = ({ node }) => (
+const TasksTable = React.memo<Props>((props) => (
   <div>
     <TaskTableHeader>
       <TaskNameCell>Name</TaskNameCell>
@@ -161,9 +171,9 @@ const TasksTable: React.VFC<Props> = ({ node }) => (
       <TaskTimeCell>UpdatedAt</TaskTimeCell>
       <TaskMiscCell>Status</TaskMiscCell>
     </TaskTableHeader>
-    <TaskRows node={node} />
+    <TaskRows {...props} />
   </div>
-);
+));
 
 TasksTable.displayName = 'TasksTable';
 
