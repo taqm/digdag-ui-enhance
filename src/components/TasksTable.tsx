@@ -92,74 +92,79 @@ const NodeStatusLabel = styled('span')({
   },
 });
 
-const TaskRows = React.memo<Props>(({ node, onLogFileOpenButtonClick }) => {
-  const [menuOpen, setMenuOpen] = React.useState(false);
-  const [openConfigDialog, setOpenConfigDialog] = React.useState(false);
+const TaskRows = React.memo<Props>(
+  ({ node, logFileExistTasks, onLogFileOpenButtonClick }) => {
+    const [menuOpen, setMenuOpen] = React.useState(false);
+    const [openConfigDialog, setOpenConfigDialog] = React.useState(false);
 
-  const onMouseEnter = () => setMenuOpen(true);
-  const onMouseLeave = () => setMenuOpen(false);
+    const onMouseEnter = () => setMenuOpen(true);
+    const onMouseLeave = () => setMenuOpen(false);
 
-  const onConfigDialogOpen = () => setOpenConfigDialog(true);
-  const onConfigDialogClose = () => setOpenConfigDialog(false);
+    const onConfigDialogOpen = () => setOpenConfigDialog(true);
+    const onConfigDialogClose = () => setOpenConfigDialog(false);
 
-  return (
-    <TaskRowGroup className={node.state}>
-      <Dialog
-        open={openConfigDialog}
-        onClose={onConfigDialogClose}
-        fullWidth
-        maxWidth="lg"
-      >
-        <DialogTitle>{node.fullName}</DialogTitle>
-        <WorkflowConfigCode config={node.config} />
-      </Dialog>
-      <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-        <TaskInfoRow className={node.state}>
-          <TaskNameCell>
-            <span title={node.fullName}>{node.name}</span>
-          </TaskNameCell>
-          <TaskTimeCell>{node.startedAt?.format(DateFormat)}</TaskTimeCell>
-          <TaskTimeCell>{node.updatedAt?.format(DateFormat)}</TaskTimeCell>
-          <TaskMiscCell>
-            <NodeStatusLabel className={node.state}>
-              {node.state}
-            </NodeStatusLabel>
-          </TaskMiscCell>
-        </TaskInfoRow>
-        {menuOpen && (
-          <TaskRowMenu>
-            {!node.isGroup && node.state !== 'blocked' && (
-              <Button
-                color="primary"
-                onClick={() => onLogFileOpenButtonClick(node.fullName)}
-              >
-                ログを開く
+    return (
+      <TaskRowGroup className={node.state}>
+        <Dialog
+          open={openConfigDialog}
+          onClose={onConfigDialogClose}
+          fullWidth
+          maxWidth="lg"
+        >
+          <DialogTitle>{node.fullName}</DialogTitle>
+          <WorkflowConfigCode config={node.config} />
+        </Dialog>
+        <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+          <TaskInfoRow className={node.state}>
+            <TaskNameCell>
+              <span title={node.fullName}>{node.name}</span>
+            </TaskNameCell>
+            <TaskTimeCell>{node.startedAt?.format(DateFormat)}</TaskTimeCell>
+            <TaskTimeCell>{node.updatedAt?.format(DateFormat)}</TaskTimeCell>
+            <TaskMiscCell>
+              <NodeStatusLabel className={node.state}>
+                {node.state}
+              </NodeStatusLabel>
+            </TaskMiscCell>
+          </TaskInfoRow>
+          {menuOpen && (
+            <TaskRowMenu>
+              {/* ログファイルがある場合のみログボタンを表示 */}
+              {logFileExistTasks[node.fullName] && (
+                <Button
+                  color="primary"
+                  onClick={() => onLogFileOpenButtonClick(node.fullName)}
+                >
+                  ログを開く
+                </Button>
+              )}
+              <Button color="secondary" onClick={onConfigDialogOpen}>
+                定義を開く
               </Button>
-            )}
-            <Button color="secondary" onClick={onConfigDialogOpen}>
-              定義を開く
-            </Button>
-          </TaskRowMenu>
-        )}
-      </div>
-      <TaskChildrenRow>
-        <div style={{ background: 'white' }}>
-          {node.isGroup &&
-            node.nodes.map((n) => (
-              <TaskRows
-                key={n.id}
-                node={n}
-                onLogFileOpenButtonClick={onLogFileOpenButtonClick}
-              />
-            ))}
+            </TaskRowMenu>
+          )}
         </div>
-      </TaskChildrenRow>
-    </TaskRowGroup>
-  );
-});
+        <TaskChildrenRow>
+          <div style={{ background: 'white' }}>
+            {node.isGroup &&
+              node.nodes.map((n) => (
+                <TaskRows
+                  key={n.id}
+                  node={n}
+                  logFileExistTasks={logFileExistTasks}
+                  onLogFileOpenButtonClick={onLogFileOpenButtonClick}
+                />
+              ))}
+          </div>
+        </TaskChildrenRow>
+      </TaskRowGroup>
+    );
+  },
+);
 
 type Props = {
   node: TaskNode;
+  logFileExistTasks: Record<string, boolean>;
   onLogFileOpenButtonClick: (taskFullName: string) => void;
 };
 

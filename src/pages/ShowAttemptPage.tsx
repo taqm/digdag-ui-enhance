@@ -75,7 +75,16 @@ const ShowAttemptPage: React.VFC<Props> = ({ id }) => {
   });
   const tasks = toApiResponse(tasksRes, (d) => d.tasks.map(toTask));
 
-  const filesRes = useAspidaSWR(apiClient.logs._attempt_id(id).files);
+  const filesRes = useAspidaSWR(apiClient.logs._attempt_id(id).files, {
+    refreshInterval: 1000 * 15, // 15sec
+  });
+
+  // ログファイルが存在するタスク名のマップ
+  const logFileExistTasks = React.useMemo<Record<string, boolean>>(() => {
+    if (!filesRes.data) return {};
+    const keys = filesRes.data.files.map((value) => [value.taskName, true]);
+    return Object.fromEntries(keys);
+  }, [filesRes]);
 
   const onLogFileOpenHandler = useLogFileOpenHandler(id, filesRes.data);
 
@@ -83,6 +92,7 @@ const ShowAttemptPage: React.VFC<Props> = ({ id }) => {
     <ShowAttemptPageTemplate
       attempt={attempt}
       tasks={tasks}
+      logFileExistTasks={logFileExistTasks}
       onLogFileOpen={onLogFileOpenHandler}
     />
   );

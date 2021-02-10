@@ -15,12 +15,14 @@ import TasksTable from '../TasksTable';
 type Props = {
   attempt: ApiResponse<View$SessionAttempt>;
   tasks: ApiResponse<View$Task[]>;
+  logFileExistTasks: Record<string, boolean>;
   onLogFileOpen: (taskFullName: string) => void;
 };
 
 const ShpwWorkflowPageTemplate: React.VFC<Props> = ({
   attempt,
   tasks,
+  logFileExistTasks,
   onLogFileOpen,
 }) => {
   const taskTree = React.useMemo(() => {
@@ -88,6 +90,7 @@ const ShpwWorkflowPageTemplate: React.VFC<Props> = ({
         {taskTree && (
           <TasksTable
             node={taskTree}
+            logFileExistTasks={logFileExistTasks}
             onLogFileOpenButtonClick={onLogFileOpen}
           />
         )}
