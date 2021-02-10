@@ -3,16 +3,26 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import styled from '@material-ui/styles/styled';
 import * as React from 'react';
 
 import MyLink from './MyLink';
-
+import { Colors, hasStatusRowStyles } from '../core/colors';
 import { View$SessionAttempt } from '../types/viewModel';
 import AttemptStatus from './AttemptStatusLabel';
 
 type Props = {
   attempts: View$SessionAttempt[];
 };
+
+const AttemptRow = styled(TableRow)({
+  ...hasStatusRowStyles(
+    ['success', Colors.Success],
+    ['error', Colors.GroupError],
+    ['running', Colors.Running],
+    ['killed', Colors.Killed],
+  ),
+});
 
 const AttemptsTable: React.VFC<Props> = ({ attempts }) => (
   <Table>
@@ -29,7 +39,7 @@ const AttemptsTable: React.VFC<Props> = ({ attempts }) => (
     </TableHead>
     <TableBody>
       {attempts.map((a) => (
-        <TableRow key={a.id}>
+        <AttemptRow key={a.id} className={a.status}>
           <TableCell align="center">
             <MyLink to={`/attempts/${a.id}`}>{a.id}</MyLink>
           </TableCell>
@@ -41,7 +51,7 @@ const AttemptsTable: React.VFC<Props> = ({ attempts }) => (
           <TableCell>
             <AttemptStatus status={a.status} />
           </TableCell>
-        </TableRow>
+        </AttemptRow>
       ))}
     </TableBody>
   </Table>

@@ -1,5 +1,6 @@
 import styled from '@material-ui/styles/styled';
 import * as React from 'react';
+import { Colors } from '../core/colors';
 import { View$AttemptStatus } from '../types/viewModel';
 
 type Props = {
@@ -7,10 +8,10 @@ type Props = {
 };
 
 const elemMap = {
-  success: styled('span')({ color: 'green' }),
-  error: styled('span')({ color: 'red' }),
-  running: styled('span')({ color: 'blue' }),
-  killed: styled('span')({ color: 'pink' }),
+  success: styled('span')({ color: Colors.Success.text }),
+  error: styled('span')({ color: Colors.Error.text }),
+  running: styled('span')({ color: Colors.Running.text }),
+  killed: styled('span')({ color: Colors.Killed.text }),
 };
 
 const AttemptStatus: React.VFC<Props> = ({ status }) => {

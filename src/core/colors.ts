@@ -35,4 +35,21 @@ export const Colors = {
   Error: colorSet('#b71c1c', '#e57373'), // red(900, 300)
   GroupError: colorSet('#d32f2f', '#ffcdd2'), // red(700, 100)
   Blocked: colorSet('#757575', '#bdbdbd'), // grey(600, 400)
+  Killed: colorSet('#757575', '#bdbdbd'), // grey(600, 400)
+};
+
+export const hasStatusRowStyles = (...pairs: [string, ColorSet][]) => {
+  return Object.fromEntries(
+    pairs.map(([status, colorSet]) => {
+      return [
+        `&.${status}`,
+        {
+          background: colorSet.bg,
+          '&:hover': {
+            background: colorSet.hover,
+          },
+        },
+      ];
+    }),
+  );
 };

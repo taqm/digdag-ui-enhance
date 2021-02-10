@@ -8,7 +8,7 @@ import * as React from 'react';
 import WorkflowConfigCode from './WorkflowConfigCode';
 import { DateFormat } from '../core/consistant';
 import { TaskNode } from '../core/TaskNode';
-import { Colors, ColorSet } from '../core/colors';
+import { Colors, hasStatusRowStyles } from '../core/colors';
 
 const TaskTableHeader = styled('div')({
   background: '#fff',
@@ -17,22 +17,6 @@ const TaskTableHeader = styled('div')({
   position: 'sticky',
   top: 0,
 });
-
-const rowBgs = (...pairs: [string, ColorSet][]) => {
-  return Object.fromEntries(
-    pairs.map(([status, colorSet]) => {
-      return [
-        `&.${status}`,
-        {
-          background: colorSet.bg,
-          '&:hover': {
-            background: colorSet.hover,
-          },
-        },
-      ];
-    }),
-  );
-};
 
 const TaskRowGroup = styled('div')({
   '& &': {
@@ -46,7 +30,7 @@ const TaskRowGroup = styled('div')({
   '& + &': {
     borderTop: 0,
   },
-  ...rowBgs(
+  ...hasStatusRowStyles(
     ['success', Colors.Success],
     ['planned', Colors.Planned],
     ['running', Colors.Running],
