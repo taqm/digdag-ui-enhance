@@ -8,7 +8,11 @@ type Props = {
 
 const WorkflowConfigCode: React.VFC<Props> = ({ config }) => {
   const yaml = React.useMemo(() => YAML.stringify(config as object), [config]);
-  return <SyntaxHighlighter language="yaml">{yaml}</SyntaxHighlighter>;
+  return (
+    <SyntaxHighlighter showLineNumbers language="yaml">
+      {yaml}
+    </SyntaxHighlighter>
+  );
 };
 
 WorkflowConfigCode.displayName = 'WorkflowConfigCode';

@@ -7,7 +7,7 @@ import pako from 'pako';
 import ShowAttemptPageTemplate from '../components/templates/ShowAttemptPageTemplate';
 import { useApiClient } from '../contexts/apiClient';
 import { toApiResponse, toSessionAttempt, toTask } from '../core/viewModel';
-import LogPageContentt from '../components/templates/LogPageContent';
+import LogPageContentt from '../components/LogPageContent';
 import { RestLogFileHandleCollection } from '../api/@types';
 
 type PathParam = {
