@@ -55,11 +55,16 @@ const useLogFileOpenHandler = (
         alert('ログファイルが見つかりませんでした');
         return;
       }
-      const logFileRes = await apiClient.logs
-        ._attempt_id(attemptId)
-        .files._file_name(targetFile.fileName)
-        .get();
-      openLogForNewWindow(taskFullName, logFileRes.originalResponse);
+      try {
+        const logFileRes = await apiClient.logs
+          ._attempt_id(attemptId)
+          .files._file_name(targetFile.fileName)
+          .get();
+        openLogForNewWindow(taskFullName, logFileRes.originalResponse);
+      } catch (err) {
+        alert('ログファイルの取得に失敗しました');
+        console.error(err);
+      }
     },
     [attemptId, logFilesRes],
   );
